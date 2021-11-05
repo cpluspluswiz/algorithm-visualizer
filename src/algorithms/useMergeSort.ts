@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, } from "react";
 import ElementContext from "../contexts/store"
 
 const useMergeSort = () => {
@@ -11,21 +11,16 @@ const useMergeSort = () => {
         let k1 = left;
         let k2 = middle + 1;
         let result = [];
-        const container = document.querySelectorAll<HTMLElement>('.app')[0];
 
         // For highliting purposes
         let arr = [];
-        let arrPositions =[];
         for (let i = k1; i < k1 + (seg1 + seg2); i++) {
             arr.push(document.querySelectorAll<HTMLElement>('.array-element')[i]);
             arr[i - k1].style.background = "cyan";
-            arrPositions.push(arr[i - k1].getBoundingClientRect());
             arr[i - k1].classList.add("slide-bottom");
         }
         await delay(200);
         let w = 0;
-
-        
 
         while((k1 - left) < seg1 && (k2 - (middle + 1)) < seg2) {
             const arr1 = document.querySelectorAll<HTMLElement>('.array-element')[k1];
@@ -40,7 +35,15 @@ const useMergeSort = () => {
                 // container.style.setProperty('--translateX', `${-18*((k2 - left) - w)}px`);
                 // container.style.setProperty('--translateY', `${0}px`);
                 arr2.classList.remove("slide-bottom");
+                arr2.animate([
+                    {transform: "translate(0px, 200px)"},
+                    { transform: `translate(${-18*((k2 - left) - w)}px, 0px)` }
+                ], {
+                    duration: 200,
+                    easing: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)'
+                });
                 arr2.style.transform = `translate(${-18*((k2 - left) - w)}px, 0px)`;
+                //arr2.style.animationDuration = '200';
                 await delay(200);
                 result.push(elementsClone[k2]);
                 arr1.style.background = "grey";
@@ -55,6 +58,14 @@ const useMergeSort = () => {
                 arr1.classList.remove("slide-bottom");
                 //arr1.classList.add("slide-in");
                 arr1.style.transform = `translate(${-18*((k1 - left) - w)}px, 0px)`;
+                arr1.style.animationDuration = '200';
+                arr1.animate([
+                    {transform: "translate(0px, 200px)"},
+                    { transform: `translate(${-18*((k1 - left) - w)}px, 0px)` }
+                ], {
+                    duration: 200,
+                    easing: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)'
+                });
                 await delay(200);
                 result.push(elementsClone[k1]);
                 k1++;
@@ -78,6 +89,14 @@ const useMergeSort = () => {
             arr1.classList.remove("slide-bottom");
             //arr1.classList.add("slide-in");
             arr1.style.transform = `translate(${-18*((k1 - left) - w)}px, 0px)`;
+            arr1.style.animationDuration = '200';
+            arr1.animate([
+                {transform: "translate(0px, 200px)"},
+                { transform: `translate(${-18*((k1 - left) - w)}px, 0px)` }
+            ], {
+                duration: 200,
+                easing: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)'
+            });
             await delay(200);
             result.push(elementsClone[k1]);
             k1++
@@ -90,7 +109,15 @@ const useMergeSort = () => {
             //container.style.setProperty('--translateY', `${0}px`);
             arr2.classList.remove("slide-bottom");
             //arr2.classList.add("slide-in");
+            arr2.animate([
+                { transform: "translate(0px, 200px)" },
+                { transform: `translate(${-18*((k2 - left) - w)}px, 0px)` }
+            ], {
+                duration: 200,
+                easing: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)'
+            });
             arr2.style.transform = `translate(${-18*((k2 - left) - w)}px, 0px)`;
+            //arr2.style.animationDuration = '200';
             await delay(200);
             result.push(elementsClone[k2]);
             k2++;
@@ -106,6 +133,7 @@ const useMergeSort = () => {
 
         for (let i = k1; i < k1 + (seg1 + seg2); i++) {
             arr[i - k1].style.removeProperty("transform");
+            arr[i - k1].style.removeProperty("animationDuration");
             console.log(arr[i - k1]);
         }
     }
