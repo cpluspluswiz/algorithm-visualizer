@@ -11,32 +11,103 @@ const useMergeSort = () => {
         let k1 = left;
         let k2 = middle + 1;
         let result = [];
+        const container = document.querySelectorAll<HTMLElement>('.app')[0];
+
+        // For highliting purposes
+        let arr = [];
+        let arrPositions =[];
+        for (let i = k1; i < k1 + (seg1 + seg2); i++) {
+            arr.push(document.querySelectorAll<HTMLElement>('.array-element')[i]);
+            arr[i - k1].style.background = "cyan";
+            arrPositions.push(arr[i - k1].getBoundingClientRect());
+            arr[i - k1].classList.add("slide-bottom");
+        }
+        await delay(200);
+        let w = 0;
+
         
+
         while((k1 - left) < seg1 && (k2 - (middle + 1)) < seg2) {
+            const arr1 = document.querySelectorAll<HTMLElement>('.array-element')[k1];
+            const arr2 = document.querySelectorAll<HTMLElement>('.array-element')[k2];
+            arr1.style.background = "green";
+            arr2.style.background = "green";
+            await delay(200);
             if(elementsClone[k1] > elementsClone[k2]) {
+                arr1.style.background = "black";
+                arr2.style.background = "grey";
+                await delay(200);
+                // container.style.setProperty('--translateX', `${-18*((k2 - left) - w)}px`);
+                // container.style.setProperty('--translateY', `${0}px`);
+                arr2.classList.remove("slide-bottom");
+                arr2.style.transform = `translate(${-18*((k2 - left) - w)}px, 0px)`;
+                await delay(200);
                 result.push(elementsClone[k2]);
+                arr1.style.background = "grey";
+                arr2.style.background = "black";
                 k2++;
+                w++;
             }
             else {
+                arr2.classList.remove("slide-in");
+                // container.style.setProperty('--translateY', `${0}px`);
+                // container.style.setProperty('--translateX', `${-18*((k1 - left) - w)}px`);
+                arr1.classList.remove("slide-bottom");
+                //arr1.classList.add("slide-in");
+                arr1.style.transform = `translate(${-18*((k1 - left) - w)}px, 0px)`;
+                await delay(200);
                 result.push(elementsClone[k1]);
                 k1++;
+                w++
             }
+            arr1.style.background = "cyan";
+            arr2.style.background = "cyan";
+        }
+        
+        
+
+        for (let i = 0; i < (seg1 + seg2); i++) {
+            arr[i].style.background = "linear-gradient( #A61B1B, #F26B83)";
+            
         }
 
         while((k1 - left) < seg1) {
+            const arr1 = document.querySelectorAll<HTMLElement>('.array-element')[k1];
+            //arr1.classList.remove("slide-in");
+            //container.style.setProperty('--translateX', `${-18*((k1 - left) - w)}px`);
+            arr1.classList.remove("slide-bottom");
+            //arr1.classList.add("slide-in");
+            arr1.style.transform = `translate(${-18*((k1 - left) - w)}px, 0px)`;
+            await delay(200);
             result.push(elementsClone[k1]);
             k1++
+            w++;
         }
         while((k2 - (middle + 1)) < seg2) {
+            const arr2 = document.querySelectorAll<HTMLElement>('.array-element')[k2];
+            //arr2.classList.remove("slide-in");
+            //container.style.setProperty('--translateX', `${-18*((k2 - left) - w)}px`);
+            //container.style.setProperty('--translateY', `${0}px`);
+            arr2.classList.remove("slide-bottom");
+            //arr2.classList.add("slide-in");
+            arr2.style.transform = `translate(${-18*((k2 - left) - w)}px, 0px)`;
+            await delay(200);
             result.push(elementsClone[k2]);
-            k2++
+            k2++;
+            w++;
         }
-
+        await delay(200);
         //replace the unsorted segment in the elemnts array with the sorted segment from the result array
         for(let i = 0; i < result.length; i ++) {
             elementsClone.splice(left + i, 1, result[i]);
         }
+        await delay(2000);
         setElements([...elementsClone]);
+
+        for (let i = k1; i < k1 + (seg1 + seg2); i++) {
+            arr[i - k1].style.removeProperty("transform");
+            console.log(arr[i - k1]);
+        }
     }
 
     const executeMergeSort = async (left: number, right: number) => {
