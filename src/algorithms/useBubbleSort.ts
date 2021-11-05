@@ -11,6 +11,12 @@ const useBubbleSort = () => {
   const {elements, setElements, setStarted, delay} = useContext(ElementContext);
 
   const bubbleSort = async (): Promise<void> => {
+    //sets the translateX value depending on the width of the array element
+    const width = (document.querySelectorAll('.array-element')[0].getBoundingClientRect().width + 3).toString();
+    const app = document.querySelector<HTMLElement>('.app') as HTMLElement;
+    app.style.setProperty('--slideLeft', `-${width}px`);
+    app.style.setProperty('--slideRight', `${width}px`);
+
     setStarted(true);
     let isSorted = false;
     let newArray = elements;

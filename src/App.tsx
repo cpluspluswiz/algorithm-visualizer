@@ -42,8 +42,8 @@ function App() {
           <p>Choose an algorithm</p>
           <div className="algorithms-list">
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Buble sort" onClick={() => bubbleSort()}/>
-            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Quick Sort" onClick={() => mergeSort()}/>
-            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Merge Sort" />
+            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Quick Sort" />
+            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Merge Sort" onClick={() => mergeSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Heap Sort" />
           </div>
         </div>
