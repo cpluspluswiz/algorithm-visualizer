@@ -41,7 +41,7 @@ function App() {
       <div className="header">
         <input id="generate-array-btn" className={`btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Generate a New Array" onClick={generateNewArrayOnClick}/>
         <div className="algorithms-container">
-          <p>Choose an algorithm</p>
+          <p>Choose An Algorithm</p>
           <div className="algorithms-list">
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Bubble sort" onClick={() => bubbleSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Quick Sort" onClick={() => quickSort()}/>
