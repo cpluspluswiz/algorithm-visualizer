@@ -22,21 +22,21 @@ const useQuickSort = () => {
         arr1.style.background = "green";
         let arr2 = document.querySelectorAll<HTMLElement>('.array-element')[r];
         arr2.style.background = "green";
-        await delay(80);
+        await delay(200);
         while(true) {
             while((elementsClone[l] <= pivot) && (l < high)) {
                 arr1.style.background = "linear-gradient( #A61B1B, #F26B83)";
                 l++;
                 arr1 = document.querySelectorAll<HTMLElement>('.array-element')[l];
                 arr1.style.background = "green";
-                await delay(80);
+                await delay(200);
             }
             while((elementsClone[r] >= pivot) && (r > low)) {
                 arr2.style.background = "linear-gradient( #A61B1B, #F26B83)";
                 r--;
                 arr2 = document.querySelectorAll<HTMLElement>('.array-element')[r];
                 arr2.style.background = "green";
-                await delay(80);
+                await delay(200);
             }
             if(l >= r) {
                 arr1.style.background = "linear-gradient( #A61B1B, #F26B83)";
