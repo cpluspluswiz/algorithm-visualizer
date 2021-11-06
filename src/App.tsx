@@ -3,6 +3,7 @@ import './App.css';
 import useBubbleSort from './algorithms/useBubbleSort';
 import useMergeSort from './algorithms/useMergeSort';
 import ElementContext from "./contexts/store"
+import useQuickSort from './algorithms/useQuickSort';
 
 
 function App() {
@@ -10,11 +11,12 @@ function App() {
   const [sortingSpeed, setSortingSpeed] = useState(200);
   const [bubbleSort] = useBubbleSort();
   const [mergeSort] = useMergeSort();
+  const [quickSort] = useQuickSort();
 
   const arrayGenerator = (size: number): void => {
     let newArray:number[] = [];
     for(let i = 0; i < size; i++){
-      let element = Math.round(Math.random() * 300);
+      let element = Math.round(Math.random() * 300) + 1;
       newArray.push(element);
     }
     setElements(newArray);
@@ -41,8 +43,8 @@ function App() {
         <div className="algorithms-container">
           <p>Choose an algorithm</p>
           <div className="algorithms-list">
-            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Buble sort" onClick={() => bubbleSort()}/>
-            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Quick Sort" />
+            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Bubble sort" onClick={() => bubbleSort()}/>
+            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Quick Sort" onClick={() => quickSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Merge Sort" onClick={() => mergeSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Heap Sort" />
           </div>
