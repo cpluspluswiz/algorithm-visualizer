@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import useBubbleSort from './algorithms/useBubbleSort';
 import useMergeSort from './algorithms/useMergeSort';
@@ -7,8 +7,7 @@ import useQuickSort from './algorithms/useQuickSort';
 
 
 function App() {
-  const {elements, setElements, started, arraySize, setArraySize} = useContext(ElementContext);
-  const [sortingSpeed, setSortingSpeed] = useState(200);
+  const {elements, setElements, started, arraySize, setArraySize, speed, setSpeed } = useContext(ElementContext);
   const [bubbleSort] = useBubbleSort();
   const [mergeSort] = useMergeSort();
   const [quickSort] = useQuickSort();
@@ -29,7 +28,7 @@ function App() {
 
   const arraySpeedSliderOnChange = () => {
     let arraySpeed = parseInt((document?.getElementById("speed-slider") as HTMLInputElement)?.value);
-    setSortingSpeed(arraySpeed);
+    setSpeed(510 - arraySpeed);
   }
 
   const generateNewArrayOnClick = () => {
@@ -46,12 +45,12 @@ function App() {
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Bubble sort" onClick={() => bubbleSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Quick Sort" onClick={() => quickSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Merge Sort" onClick={() => mergeSort()}/>
-            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Heap Sort" />
+            {/* <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Heap Sort" /> */}
           </div>
         </div>
         <div className="algorithms-params">
           <p>Set Speed</p>
-          <input id="speed-slider" className={`slider ${started ? "slider-disabled" : ""}`} disabled={started} type="range" min="10" max="400" value={sortingSpeed} onChange={arraySpeedSliderOnChange}/>
+          <input id="speed-slider" className={`slider ${started ? "slider-disabled" : ""}`} disabled={started} type="range" min="10" max="500" value={510 - speed} onChange={arraySpeedSliderOnChange}/>
           <p>Set Size</p>
           <input id="size-slider" className={`slider ${started ? "slider-disabled" : ""}`} disabled={started} type="range" min="2" max="150" value={arraySize} onChange={arraySizeSliderOnChange}/>
         </div>

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import ElementContext from "../contexts/store"
 
 const useQuickSort = () => {
-    const {elements, setElements, setStarted, delay, arraySize} = useContext(ElementContext);
+    const {elements, setElements, setStarted, delay, speed } = useContext(ElementContext);
     let elementsClone = [...elements];
     const width = document.querySelectorAll('.array-element')[0]?.getBoundingClientRect().width + 3;
     const app = document.querySelector<HTMLElement>('.app') as HTMLElement;
@@ -22,21 +22,21 @@ const useQuickSort = () => {
         arr1.style.background = "green";
         let arr2 = document.querySelectorAll<HTMLElement>('.array-element')[r];
         arr2.style.background = "green";
-        await delay(200);
+        await delay(speed);
         while(true) {
             while((elementsClone[l] <= pivot) && (l < high)) {
                 arr1.style.background = "linear-gradient( #A61B1B, #F26B83)";
                 l++;
                 arr1 = document.querySelectorAll<HTMLElement>('.array-element')[l];
                 arr1.style.background = "green";
-                await delay(200);
+                await delay(speed);
             }
             while((elementsClone[r] >= pivot) && (r > low)) {
                 arr2.style.background = "linear-gradient( #A61B1B, #F26B83)";
                 r--;
                 arr2 = document.querySelectorAll<HTMLElement>('.array-element')[r];
                 arr2.style.background = "green";
-                await delay(200);
+                await delay(speed);
             }
             if(l >= r) {
                 arr1.style.background = "linear-gradient( #A61B1B, #F26B83)";
@@ -46,12 +46,12 @@ const useQuickSort = () => {
             } else {
                 arr1.style.background = "black";
                 arr2.style.background = "grey";
-                await delay(200);
+                await delay(speed);
                 app.style.setProperty('--slideLeft', `-${width*(r - l)}px`);
                 app.style.setProperty('--slideRight', `${width*(r - l)}px`);
                 arr1.classList.add("slide-right");
                 arr2.classList.add("slide-left");
-                await delay(200);
+                await delay(speed);
                 swap(l, r);
                 setElements([...elementsClone]);
                 arr1.style.background = "linear-gradient( #A61B1B, #F26B83)";
@@ -66,7 +66,7 @@ const useQuickSort = () => {
         app.style.setProperty('--slideRight', `${width*(high - l)}px`);
         arr1.classList.add("slide-right");
         arr2.classList.add("slide-left");
-        await delay(200);
+        await delay(speed);
         swap(l, high);
         setElements([...elementsClone]);
         arr1.classList.remove("slide-right");

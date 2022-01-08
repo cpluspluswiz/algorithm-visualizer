@@ -8,7 +8,7 @@ const swapArrayEl = (arr:number[], idx:number) => {
 }
 
 const useBubbleSort = () => {
-  const {elements, setElements, setStarted, delay} = useContext(ElementContext);
+  const {elements, setElements, setStarted, delay, speed } = useContext(ElementContext);
 
   const bubbleSort = async (): Promise<void> => {
     //sets the translateX value depending on the width of the array element
@@ -27,15 +27,15 @@ const useBubbleSort = () => {
         const arr2 = document.querySelectorAll<HTMLElement>('.array-element')[i + 1];
         arr1.style.background = "green";
         arr2.style.background = "green";
-        await delay(200);
+        await delay(speed);
         if(newArray[i] > newArray[i + 1]){
             swapArrayEl(newArray, i);
             arr1.style.background = "black";
             arr2.style.background = "grey";
-            await delay(200);
+            await delay(speed);
             arr1.classList.add("slide-right")
             arr2.classList.add("slide-left")
-            await delay(200);
+            await delay(speed);
             setElements([...newArray]);
             arr1.style.background = "grey";
             arr2.style.background = "black";
