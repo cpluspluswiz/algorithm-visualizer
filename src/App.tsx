@@ -4,6 +4,7 @@ import useBubbleSort from './algorithms/useBubbleSort';
 import useMergeSort from './algorithms/useMergeSort';
 import ElementContext from "./contexts/store"
 import useQuickSort from './algorithms/useQuickSort';
+import useHeapSort from './algorithms/useHeapSort';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [bubbleSort] = useBubbleSort();
   const [mergeSort] = useMergeSort();
   const [quickSort] = useQuickSort();
+  const [heapSort] = useHeapSort();
 
   const arrayGenerator = (size: number): void => {
     let newArray:number[] = [];
@@ -46,7 +48,7 @@ function App() {
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Bubble sort" onClick={() => bubbleSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Quick Sort" onClick={() => quickSort()}/>
             <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Merge Sort" onClick={() => mergeSort()}/>
-            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Heap Sort" />
+            <input className={`btn algorithm-btn ${started ? "btn-disabled" : ""}`} disabled={started} type="button" value="Heap Sort" onClick={() => heapSort()}/>
           </div>
         </div>
         <div className="algorithms-params">
